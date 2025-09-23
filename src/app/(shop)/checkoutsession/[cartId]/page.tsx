@@ -43,8 +43,8 @@ export default function CheckOutSession() {
     values: z.infer<typeof SchemaCheckout>
   ) {
     const data = await checkoutCardPayment(cartId, values);
-    window.location.href = data.session.url;
-    // window.open(data.session.url, "_blank");
+    // window.location.href = data.session.url;
+    window.open(data.session.url, "_blank");
   }
   return (
     <div className="w-3/4 mx-auto my-5">
