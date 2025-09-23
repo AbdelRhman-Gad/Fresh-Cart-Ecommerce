@@ -22,7 +22,7 @@ export default function Navbar() {
     // { path: "/products", content: "Products", protected: false },
     // { path: "/brands", content: "Brands", protected: false },
     // { path: "/category", content: "Category", protected: false },
-    { path: "/wishlist", content: "Wishlist", protected: false },
+    { path: "/wishlist", content: "Wishlist", protected: true },
     // { path: "/cart", content: "Cart", protected: true },
     { path: "/allorders", content: "Orders", protected: true },
   ];
