@@ -31,9 +31,9 @@ export default function RootLayout({
         <UserProvider>
           <CountProvider>
             <Navbar />
-            <main className="p-5">{children}</main>
+            <main className="p-5 mb-3 min-h-screen">{children}</main>
             <Toaster />
-            {/* <Footer /> */}
+            <Footer />
           </CountProvider>
         </UserProvider>
       </body>

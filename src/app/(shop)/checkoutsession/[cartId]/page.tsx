@@ -12,12 +12,18 @@ import {
 import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { checkoutCardPayment } from "@/OrderActions/OrderActions";
-import { useParams } from "next/navigation";
-import React from "react";
+import { cashOrder, checkoutCardPayment } from "@/OrderActions/OrderActions";
+import { useParams, useRouter } from "next/navigation";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { CountContext } from "@/CountProvider";
+import { CartData } from "@/types/cart.type";
+import { getCartData } from "@/CartActions/CartActions";
+import { toast } from "sonner";
 
 export default function CheckOutSession() {
+  const CountData = useContext(CountContext);
+  const Route = useRouter();
   const { cartId }: { cartId: string } = useParams();
   const SchemaCheckout = z.object({
     details: z
@@ -39,12 +45,24 @@ export default function CheckOutSession() {
     },
     resolver: zodResolver(SchemaCheckout),
   });
-  async function checkoutSessionPayment(
-    values: z.infer<typeof SchemaCheckout>
-  ) {
+  async function checkoutSessionCard(values: z.infer<typeof SchemaCheckout>) {
     const data = await checkoutCardPayment(cartId, values);
     window.location.href = data.session.url;
     // window.open(data.session.url, "_blank");
+  }
+  async function checkoutSessionCash(values: z.infer<typeof SchemaCheckout>) {
+    const data = await cashOrder(cartId, values);
+    if (data.status == "success") {
+      const data: CartData = await getCartData();
+      const sum = data.data.products.reduce(
+        (total, Item) => (total += Item.count),
+        0
+      );
+      CountData?.setCount(sum);
+      Route.push("/allorders");
+    } else {
+      toast.error("");
+    }
   }
   return (
     <div className="w-3/4 mx-auto my-5">
@@ -53,7 +71,7 @@ export default function CheckOutSession() {
         <Form {...shippingForm}>
           <form
             className="space-y-2"
-            onSubmit={shippingForm.handleSubmit(checkoutSessionPayment)}
+            // onSubmit={shippingForm.handleSubmit(checkoutSessionCard)}
           >
             <FormField
               control={shippingForm.control}
@@ -97,9 +115,22 @@ export default function CheckOutSession() {
                 </FormItem>
               )}
             />
-            <Button className="bg-green-600 px-8 cursor-pointer hover:bg-green-800 text-white float-right">
-              Continue
-            </Button>
+            <div className="flex gap-3 float-right">
+              <Button
+                type="button"
+                onClick={shippingForm.handleSubmit(checkoutSessionCard)}
+                className="bg-green-600 px-8 hover:bg-green-800 text-white cursor-pointer"
+              >
+                Card
+              </Button>
+              <Button
+                type="button"
+                onClick={shippingForm.handleSubmit(checkoutSessionCash)}
+                className="bg-gray-600 px-8 hover:bg-gray-900 text-white cursor-pointer"
+              >
+                Cash
+              </Button>
+            </div>
             <div className="clear-both"></div>
           </form>
         </Form>
