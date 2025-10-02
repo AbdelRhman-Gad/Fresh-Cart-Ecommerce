@@ -114,7 +114,7 @@ export default function Navbar() {
       <NavigationMenuList>
         {status == "authenticated" ? (
           <>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle()}
@@ -123,7 +123,7 @@ export default function Navbar() {
                   Hello {data?.user.name}
                 </span>
               </NavigationMenuLink>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild

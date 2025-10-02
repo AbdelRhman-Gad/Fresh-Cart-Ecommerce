@@ -77,7 +77,7 @@ export default function Wishlist() {
                       </Link>
                     </td>
                     <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                      {item.title}
+                      {item.title.split(" ").slice(0, 2).join(" ")}
                     </td>
                     <td className="px-6 py-4 text-main">
                       {item.category?.name}

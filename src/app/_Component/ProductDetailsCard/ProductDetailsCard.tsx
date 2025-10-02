@@ -22,9 +22,9 @@ export default function ProductDetailsCard({
     images,
   } = product;
   return (
-    <div className="w-4/5 m-auto">
+    <div className="container m-auto">
       <div className="grid grid-cols-12 gap-3 items-center my-24">
-        <div className="col-span-4">
+        <div className="col-span-5">
           {/* <Image
             src={imageCover}
             alt={title}
@@ -34,7 +34,7 @@ export default function ProductDetailsCard({
           /> */}
           <ProductSlider images={images} />
         </div>
-        <div className="col-span-8">
+        <div className="col-span-7">
           <h1 className="text-2xl">{title}</h1>
           <p className="text-xl text-gray-500 my-5">{description}</p>
           <h4 className="text-main py-2">{name}</h4>
@@ -46,7 +46,7 @@ export default function ProductDetailsCard({
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <AddCartBtn className="w-[740]" id={_id} />
+            <AddCartBtn className="w-3/4" id={_id} />
             <AddToWishlistBtn id={_id} />
           </div>
         </div>
