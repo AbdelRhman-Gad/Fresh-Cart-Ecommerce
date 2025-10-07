@@ -23,8 +23,8 @@ export default function ProductDetailsCard({
   } = product;
   return (
     <div className="container m-auto">
-      <div className="grid grid-cols-12 gap-3 items-center my-24">
-        <div className="col-span-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center my-24">
+        <div className="col-span-12 lg:col-span-5">
           {/* <Image
             src={imageCover}
             alt={title}
@@ -34,7 +34,7 @@ export default function ProductDetailsCard({
           /> */}
           <ProductSlider images={images} />
         </div>
-        <div className="col-span-7">
+        <div className="col-span-12 lg:col-span-7 mt-10 lg:mt-0">
           <h1 className="text-2xl">{title}</h1>
           <p className="text-xl text-gray-500 my-5">{description}</p>
           <h4 className="text-main py-2">{name}</h4>

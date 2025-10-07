@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <NavigationMenu
       viewport={false}
-      className="max-w-full justify-between shadow-md p-3"
+      className="max-w-full justify-between shadow-md p-4"
     >
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -102,7 +102,7 @@ export default function Navbar() {
                 href="/cart"
               >
                 Cart
-                <span className="text-white absolute bottom-5 left-10 inline-flex items-center justify-center w-8 h-5.5 bg-main rounded-full">
+                <span className="text-white absolute bottom-6 left-9 inline-flex items-center justify-center w-5 h-5 bg-main rounded-full">
                   {countData?.count}
                 </span>
               </Link>
